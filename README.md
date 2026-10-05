@@ -1,5 +1,10 @@
 # Sistema Académico
 
+## Nombre de los integrantes
+- Diana Paola Quintero Ceballos
+- Richard Tabares Botero
+- Roger Avila Uribe
+
 ## Descripción general del proyecto
 
 ## Estructura de los archivos
