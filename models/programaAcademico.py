@@ -28,8 +28,12 @@ class programaAcademico:
     def get_facultad(self):
         return self._facultad
 
+    # Validación para que el número de semestres sea mayor que cero
     def set_numeroDeSemestres(self, numeroDeSemestres):
-        self._numeroDeSemestres = numeroDeSemestres
+        if(numeroDeSemestres > 0):
+            self._numeroDeSemestres = numeroDeSemestres
+        else:
+            raise ValueError("El número de semestres del Programa Académico debe ser mayor que cero")
 
     def get_numeroDeSemestres(self):
         return self._numeroDeSemestres

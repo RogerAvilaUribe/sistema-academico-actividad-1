@@ -20,7 +20,10 @@ class persona:
     def get_identificacion(self):
         return self._identificacion
 
+    # Validación para que el correo electrónico no se reemplace por una cadena vacia
     def set_correo(self, correo):
+        if correo.strip() == "":
+            raise ValueError("El correo electrónico no puede estar vacio")
         self._correo = correo
 
     def get_correo(self):

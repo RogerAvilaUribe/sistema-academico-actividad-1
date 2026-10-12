@@ -20,9 +20,13 @@ class asignatura:
     
     def get_nombre(self):
         return self._nombre
-    
+
+    # Validación para que el número de créditos sea mayor que cero
     def set_numeroDeCreditos(self, numeroDeCreditos):
-        self._numeroDeCreditos = numeroDeCreditos
+        if(numeroDeCreditos > 0):
+            self._numeroDeCreditos = numeroDeCreditos
+        else:
+            raise ValueError("El número de créditos de la Asignatura debe ser mayor que cero")
         
     def get_numeroDeCreditos(self):
         return self._numeroDeCreditos
