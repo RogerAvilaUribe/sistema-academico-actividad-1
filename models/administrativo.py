@@ -10,7 +10,15 @@ class administrativo (persona):
         self.setJornada(jornada)
 
     def mostrar_informacion(self):
-        return super().mostrar_informacion(), self.getNumeroDeEmpleado(), self.getDependencia(), self.getCargo(), self.getJornada()
+        print(f"---INFORMACION ADMINISTRATIVO---")
+        super().mostrar_informacion()
+        print(f"Numero de empleado: {self.getNumeroDeEmpleado()}")
+        print(f"Dependencia: {self.getDependencia()}")
+        print(f"Cargo: {self.getCargo()}")
+        print(f"Jornada: {self.getJornada()}")
+    
+    def realizar_actividad_principal(self):
+        print(f"El administrativo {self.get_nombre()} desempeña el cargo de {self.getCargo()} en la dependencia de {self.getDependencia()}.")
 
     # SETTERS
     def setNumeroDeEmpleado(self, numerodeEmpleado):

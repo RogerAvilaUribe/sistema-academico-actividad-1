@@ -10,8 +10,16 @@ class docente (persona):
         self.setNumeroDeHorasSemanales(numeroDeHorasSemanales)
 
     def mostrar_informacion(self):
-        return super().mostrar_informacion(), self.getNumeroDeEmpleado(), self.getFacultad(), self.getTipoDeContratacion(), self.getNumeroDeHorasSemanales()
-
+        print(f"---INFORMACION DOCENTE---")
+        super().mostrar_informacion()
+        print(f"Numero de empleado: {self.getNumeroDeEmpleado()}")
+        print(f"Facultad: {self.getFacultad()}")
+        print(f"Tipo de contratacion: {self.getTipoDeContratacion()}")
+        print(f"Número de horas semanales: {self.getNumeroDeHorasSemanales()}")
+    
+    def realizar_actividad_principal(self):
+        print(f"El docente {self.get_nombre()} orienta clases en la facultad de {self.getFacultad()}.")
+        
     # SETTERS
     def setNumeroDeEmpleado(self, numeroDeEmpleado):
         self._numeroDeEmpleado = numeroDeEmpleado
