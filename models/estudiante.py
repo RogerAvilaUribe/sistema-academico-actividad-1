@@ -10,8 +10,16 @@ class estudiante (persona):
         self.setPromedio(promedio)
     
     def mostrar_informacion(self):
-        return super().mostrar_informacion(), self.getProgramaAcademico(), self.getSemestre(), self.getPromedio()
+        print(f"---INFORMACION ESTUDIANTE---")
+        super().mostrar_informacion()
+        print(f"Codigo del estudiante: {self.getCodigoEstudiante()}")
+        print(f"Programa academico: {self.getProgramaAcademico()}")
+        print(f"Semestre: {self.getSemestre()}")
+        print(f"Promedio: {self.getPromedio()}")
     
+    def realizar_actividad_principal(self):
+        print(f"El estudiante {self.get_nombre()} cursa el programa {self.getProgramaAcademico()} y se encuentra en el semestre {self.getSemestre()}.")
+        
     # SETTERs
     def setCodigoEstudiante(self, codigoEstudiante):
         # validaciones

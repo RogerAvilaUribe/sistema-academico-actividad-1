@@ -5,7 +5,9 @@ class persona:
         self.set_correo(correo)
 
     def mostrar_informacion(self):
-        return self.get_nombre(), self.get_identificacion(), self.get_correo()
+        print(f"Nombre de la persona: {self.get_nombre()}")
+        print(f"Identificación: {self.get_identificacion()}")
+        print(f"Correo Electronico: {self.get_correo()}")
 
     # Getters and Setters
     def set_nombre(self, nombre):

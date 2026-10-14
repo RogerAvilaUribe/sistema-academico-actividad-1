@@ -7,7 +7,10 @@ class programaAcademico:
         self.set_numeroDeSemestres(numeroDeSemestres)
 
     def mostrar_informacion(self):
-        return f"Código de programa: {self.get_codigoPrograma()}, Nombre: {self.get_nombre()}, Facultad: {self.get_facultad()}, Número de semestres: {self.get_numeroDeSemestres()}"
+        print(f"Codigo del programa: {self.get_codigoPrograma()}")
+        print(f"Nombre del programa: {self.get_nombre()}")
+        print(f"Nombre de la facultad: {self.get_facultad()}")
+        print(f"Numero de semestres: {self.get_numeroDeSemestres()}")
 
     # Getters and Setters
     def set_codigoPrograma(self, codigoPrograma):
