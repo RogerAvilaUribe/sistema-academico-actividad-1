@@ -58,8 +58,8 @@
 - [x] Utilizar `super()` en los constructores para reutilizar los atributos comunes.
 
 ## Fase 4: Sobrescritura de métodos (Polimorfismo estático / comportamientos particulares)
-- [] Sobrescribir `mostrar_informacion()` en `estudiante`, `docente` y `administrativo` para incluir sus datos específicos.
-- [] Implementar y sobrescribir el método `realizar_actividad_principal()` en cada clase hija con su comportamiento particular.
+- [x] Sobrescribir `mostrar_informacion()` en `estudiante`, `docente` y `administrativo` para incluir sus datos específicos.
+- [x] Implementar y sobrescribir el método `realizar_actividad_principal()` en cada clase hija con su comportamiento particular.
 
 ## Fase 5: Procesamiento conjunto y Polimorfismo dinámico
 - [] Crear una única colección (lista) en el programa principal con al menos 2 estudiantes, 2 docentes y 2 administrativos.
