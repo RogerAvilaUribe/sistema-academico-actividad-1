@@ -45,7 +45,7 @@ def main():
         print("5. Registrar Personal Administrativo")
         print("6. Listar Programas")
         print("7. Listar Asignaturas")
-        print("8. Generar Reporte Polimórfico de la Comunidad")
+        print("8. Generar Reporte Polimórfico de personas")
         print("9. Salir")
         
         # capturamos la opcion a ejecutar
