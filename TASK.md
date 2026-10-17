@@ -62,15 +62,15 @@
 - [x] Implementar y sobrescribir el método `realizar_actividad_principal()` en cada clase hija con su comportamiento particular.
 
 ## Fase 5: Procesamiento conjunto y Polimorfismo dinámico
-- [] Crear una única colección (lista) en el programa principal con al menos 2 estudiantes, 2 docentes y 2 administrativos.
-- [] Recorrer la colección usando un **único ciclo** sin condicionales de tipo (`isinstance` o `type`), invocando `mostrar_informacion()` y `realizar_actividad_principal()`.
+- [x] Crear una única colección (lista) en el programa principal con al menos 2 estudiantes, 2 docentes y 2 administrativos.
+- [x] Recorrer la colección usando un **único ciclo** sin condicionales de tipo (`isinstance` o `type`), invocando `mostrar_informacion()` y `realizar_actividad_principal()`.
 
 ## Fase 6: Pruebas, Repositorio y Documentación (GitHub)
-- [] Escribir el script de pruebas en el archivo principal (`main.py`) cubriendo todos los requerimientos
-    - [] La creación de programas académicos y asignaturas.
-    - [] La creación de al menos seis personas.
-    - [] La consulta de la información de los objetos.
-    - [] La modificación válida de datos encapsulados.
-    - [] El intento de asignar al menos tres valores inválidos.
-    - [] La presentación particular de cada tipo de persona.
-    - [] El recorrido polimórfico de la colección de personas.
+- [x] Escribir el script de pruebas en el archivo principal (`main.py`) cubriendo todos los requerimientos
+    - [x] La creación de programas académicos y asignaturas.
+    - [x] La creación de al menos seis personas.
+    - [x] La consulta de la información de los objetos.
+    - [x] La modificación válida de datos encapsulados.
+    - [x] El intento de asignar al menos tres valores inválidos.
+    - [x] La presentación particular de cada tipo de persona.
+    - [x] El recorrido polimórfico de la colección de personas.
