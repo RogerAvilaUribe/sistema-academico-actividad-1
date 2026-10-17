@@ -1,4 +1,6 @@
 from controllers.user_controller import userController
+from controllers.asignatura_controller import asignaturaController
+from controllers.programa_controller import programaController
 
 # metodo para mostrar todo los usuario y aplica POLIMORFISMO
 def mostrar_usuarios(user_controller):
@@ -14,10 +16,40 @@ def mostrar_usuarios(user_controller):
         usuario.realizar_actividad_principal()
         print("-"*100)
 
+# metodo para mostrar todo las asignaturas
+def mostrar_asignaturas(asignatura_controller):
+    asignaturas = asignatura_controller.get_asignaturas()
+    
+    if not asignaturas:
+        print("Sin asignaturas para mostrar")
+        return
+    
+    for asignatura in asignaturas:
+        asignatura.mostrar_informacion()
+        print("-"*100)
+
+# metodo para mostrar todos los programas
+def mostrar_programas(programa_controller):
+    programas = programa_controller.get_programas()
+    
+    if not programas:
+        print("Sin programas para mostrar")
+        return
+    
+    for programa in programas:
+        programa.mostrar_informacion()
+        print("-"*100)
+
 def main():
     
     # Inicializamos el controlador de usuarios
     user_controller = userController()
+
+    # Inicializamos el controlador de asignaturas
+    asignatura_controller = asignaturaController()
+
+    # Inicializamos el controlador de programas
+    programa_controller = programaController()
     
     # Precargamos algunos datos
     user_controller.agregar_estudiante("Lucía Pérez", "1010222", "lucia-perez@gmail.com", "EST-01", "Ingeniería de Sistemas", 3, 4.3)
@@ -57,11 +89,34 @@ def main():
             
             case '1':
                 print("\n--- Registrar Programa Academico ---")
-                break
-                
+                try:
+                    # capturamos los datos del programa
+                    codigoPrograma = input("Ingrese el codigo del programa: ")
+                    nombre = input("Ingrese el nombre del programa: ")
+                    facultad = input("Ingresa facultad a la que pertenece: ")
+                    numeroDeSemestres = int(input("Ingrese el numero de semestres: "))
+                                    
+                    # utilizamos el controlador para agregar un nuevo programa
+                    programa_controller.agregar_programa(
+                        codigoPrograma, nombre, facultad, numeroDeSemestres)
+                                    
+                except ValueError as e:
+                    print(f"Error de validacion: {e}")
             case '2':
                 print("\n--- Registrar Asignatura ---")
-                break
+                try:
+                    # capturamos los datos de la asignatura
+                    codigoAsignatura = input("Ingrese el codigo de la asignatura: ")
+                    nombre = input("Ingrese el nombre de la asignatura: ")
+                    numeroDeCreditos = int(input("Ingresa numero de los creditos: "))
+                    codigoPrograma = input("Ingrese el codigo del programa: ")
+                                    
+                    # utilizamos el controlador para agregar una nueva asignatura
+                    asignatura_controller.agregar_asignatura(
+                        codigoAsignatura, nombre, numeroDeCreditos, codigoPrograma)
+                                    
+                except ValueError as e:
+                    print(f"Error de validacion: {e}")
             
             case '3':
                 print("\n--- Registrar Estudiante ---")
@@ -119,14 +174,14 @@ def main():
                     
             case '6':
                 print("\n--- Listado de programas ---")
-                break
+                mostrar_programas(programa_controller)
             
             case '7':
-                print("\n--- Listado de asginaturas ---")
-                break
+                print("\n--- Listado de asignaturas ---")
+                mostrar_asignaturas(asignatura_controller)
             
             case '8':
-                # mostrarmos todos los usuario registrados sin importar el tipo
+                # mostraremos todos los usuario registrados sin importar el tipo
                 print("=====================================================")
                 print("   REPORTE DE USUARIOS REGISTRADOS (POLIMORFISMO)  ")
                 print("=====================================================")
