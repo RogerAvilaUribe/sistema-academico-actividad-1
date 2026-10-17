@@ -16,6 +16,8 @@ sistema-academico-actividad-1/
 ├── TASK.md                      # Lista de verificación de las fases del taller
 ├── controllers/
 │   └── user_controller.py       # Controlador: crea y almacena las personas en una lista
+│   └── programa_controller.py       # Controlador: crea y almacena los programas en una lista
+│   └── asignatura_controller.py       # Controlador: crea y almacena las asignaturas en una lista
 └── models/
     ├── persona.py               # Clase base con los datos comunes (nombre, identificación, correo)
     ├── estudiante.py            # Hereda de persona: código, programa académico, semestre y promedio
