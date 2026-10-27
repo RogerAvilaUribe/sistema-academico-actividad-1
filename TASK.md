@@ -1,4 +1,4 @@
-# Checklist del Taller: Sistema de Gestión Académica (POO en Python)
+# Checklist del Taller: Sistema de Gestión Académica (POO en Python) - Actividad N.1
 
 ## README.md
 - [] Estructura de archivos
@@ -74,3 +74,59 @@
     - [x] El intento de asignar al menos tres valores inválidos.
     - [x] La presentación particular de cada tipo de persona.
     - [x] El recorrido polimórfico de la colección de personas.
+
+
+# Checklist del Taller: Sistema de Gestión Académica (POO en Python) - Actividad N.2
+
+# Checklist del Taller: Evolución del Sistema de Gestión Académica (Actividad N°2)
+
+## Fase 1: Generalización de las personas (Clases abstractas)
+- [x] Importar `ABC` y `abstractmethod` del módulo `abc` en el archivo de modelos.
+- [x] Modificar la clase `persona` para que herede de `ABC`.
+- [x] Convertir el método `realizar_actividad_principal()` en un método abstracto usando el decorador `@abstractmethod`.
+- [x] Verificar que Python impida la creación directa de objetos de la clase `persona` (lanzando `TypeError`).
+- [x] Asegurar que las clases hijas (`Estudiante`, `Docente`, `Administrativo`) mantengan su implementación de `realizar_actividad_principal()`.
+
+## Fase 2: Organización de la oferta académica (Composición y Grupos)
+- [x] Crear la clase `Horario` con atributos: `dia`, `hora_inicio`, `hora_fin`, `salon` y su respectivo método para mostrar información.
+- [x] Crear la clase `GrupoAcademico` con atributos: `codigo`, `asignatura` (objeto de tipo `Asignatura`), `docente` (objeto de tipo `Docente`), `capacidad_maxima`, `estudiantes_matriculados` (lista) y `horario` (objeto de tipo `Horario`).
+- [x] Implementar los métodos obligatorios en `GrupoAcademico`:
+  - [x] `mostrar_informacion_grupo()`
+  - [x] `matricular_estudiante(estudiante)`
+  - [x] `retirar_estudiante(codigo_estudiantil)`
+  - [x] `mostrar_estudiantes()`
+- [ ] Validar que el grupo reciba objetos reales de `Asignatura`, `Docente` y `Horario`, y no textos sueltos.
+
+## Fase 3: Relación de composición
+- [ ] Verificar que la clase `Horario` se instancie e integre dentro de la estructura de `GrupoAcademico` evidenciando composición (ciclo de vida ligado o dependencia estricta).
+- [ ] Documentar en el archivo `README.md` y en el Documento de Decisiones de Diseño la justificación de por qué la relación entre grupo y horario es de composición y no de herencia.
+
+## Fase 4: Control de situaciones excepcionales (Excepciones personalizadas)
+- [ ] Crear clases de excepciones personalizadas heredando de `Exception`:
+  - [ ] `EstudianteYaMatriculadoException`
+  - [ ] `CapacidadMaximaExcedidaException`
+  - [ ] `EstudianteNoMatriculadoException`
+  - [ ] `AsignaturaNoExisteException`
+  - [ ] `ProgramNoExisteException` (o similar para programa académico)
+- [ ] Lanzar (`raise`) estas excepciones desde los métodos correspondientes del controlador o clases cuando ocurra la anomalía.
+- [ ] Capturar (`try-except`) las excepciones en el programa principal (`main.py`) mostrando mensajes comprensibles y permitiendo que el flujo del programa continúe sin cerrarse bruscamente.
+
+## Fase 5: Pruebas mínimas y Actualización de Controladores
+- [ ] Actualizar el controlador para administrar listas de horarios y grupos académicos.
+- [ ] Ampliar el menú interactivo con opciones para:
+  - [ ] Crear horarios y grupos académicos vinculando objetos existentes.
+  - [ ] Matricular estudiantes en un grupo.
+  - [ ] Retirar estudiantes de un grupo.
+  - [ ] Buscar asignaturas y programas académicos (disparando las excepciones si no se encuentran).
+- [ ] Implementar pruebas en el menú que demuestren:
+  - [ ] Imposibilidad de instanciar `persona` directamente.
+  - [ ] Matrícula correcta y rechazo de duplicados.
+  - [ ] Control de capacidad máxima del grupo.
+  - [ ] Retiro correcto y rechazo de estudiantes no matriculados.
+  - [ ] Búsquedas fallidas controladas con excepciones personalizadas.
+
+## Fase 6: Documentación y Entregables en Git (GitHub)
+- [ ] Crear la etiqueta (tag) en Git denominada `Entrega_AC2`.
+- [ ] Actualizar el archivo `README.md` con la información solicitada en la actividad (declaración de IA, estructura, etc.).
+- [ ] Elaborar y adjuntar el **Documento de Decisiones de Diseño** en formato PDF o Markdown respondiendo detalladamente a todas las preguntas planteadas en la guía.
+- [ ] Verificar que todos los integrantes del equipo cuenten con al menos un commit válido y registrado en el repositorio.
