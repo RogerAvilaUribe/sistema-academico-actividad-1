@@ -1,9 +1,12 @@
-class persona:
+from abc import ABC, abstractmethod
+
+class persona(ABC):
     def __init__(self, nombre, identificacion, correo):
         self.set_nombre(nombre)
         self.set_identificacion(identificacion)
         self.set_correo(correo)
-
+        
+    @abstractmethod
     def mostrar_informacion(self):
         print(f"Nombre de la persona: {self.get_nombre()}")
         print(f"Identificación: {self.get_identificacion()}")
