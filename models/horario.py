@@ -7,11 +7,7 @@ class horario:
         self.set_salon(salon)
 
     def mostrar_informacion(self):
-        print(f"Codigo del horario: {self.get_codigoHorario()}")
-        print(f"Dia: {self.get_dia()}")
-        print(f"Hora de inicio: {self.get_horaInicio()}")
-        print(f"Hora de finalizacion: {self.get_horaFinal()}")
-        print(f"Salon: {self.get_salon()}")
+        print(f"Dia: {self.get_dia()} - Horario: {self.get_horaInicio()} a {self.get_horaFinal()} - Salon: {self.get_salon()}")
 
     # Getters and Setters
     def set_codigoHorario(self, codigoHorario):

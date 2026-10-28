@@ -95,10 +95,10 @@
   - [x] `matricular_estudiante(estudiante)`
   - [x] `retirar_estudiante(codigo_estudiantil)`
   - [x] `mostrar_estudiantes()`
-- [ ] Validar que el grupo reciba objetos reales de `Asignatura`, `Docente` y `Horario`, y no textos sueltos.
+- [x] Validar que el grupo reciba objetos reales de `Asignatura`, `Docente` y `Horario`, y no textos sueltos.
 
 ## Fase 3: Relación de composición
-- [ ] Verificar que la clase `Horario` se instancie e integre dentro de la estructura de `GrupoAcademico` evidenciando composición (ciclo de vida ligado o dependencia estricta).
+- [x] Verificar que la clase `Horario` se instancie e integre dentro de la estructura de `GrupoAcademico` evidenciando composición (ciclo de vida ligado o dependencia estricta).
 - [ ] Documentar en el archivo `README.md` y en el Documento de Decisiones de Diseño la justificación de por qué la relación entre grupo y horario es de composición y no de herencia.
 
 ## Fase 4: Control de situaciones excepcionales (Excepciones personalizadas)
@@ -112,11 +112,11 @@
 - [ ] Capturar (`try-except`) las excepciones en el programa principal (`main.py`) mostrando mensajes comprensibles y permitiendo que el flujo del programa continúe sin cerrarse bruscamente.
 
 ## Fase 5: Pruebas mínimas y Actualización de Controladores
-- [ ] Actualizar el controlador para administrar listas de horarios y grupos académicos.
-- [ ] Ampliar el menú interactivo con opciones para:
-  - [ ] Crear horarios y grupos académicos vinculando objetos existentes.
-  - [ ] Matricular estudiantes en un grupo.
-  - [ ] Retirar estudiantes de un grupo.
+- [x] Actualizar el controlador para administrar listas de horarios y grupos académicos.
+- [x] Ampliar el menú interactivo con opciones para:
+  - [x] Crear horarios y grupos académicos vinculando objetos existentes.
+  - [x] Matricular estudiantes en un grupo.
+  - [x] Retirar estudiantes de un grupo.
   - [ ] Buscar asignaturas y programas académicos (disparando las excepciones si no se encuentran).
 - [ ] Implementar pruebas en el menú que demuestren:
   - [ ] Imposibilidad de instanciar `persona` directamente.

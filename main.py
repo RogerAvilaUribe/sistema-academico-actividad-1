@@ -1,6 +1,8 @@
 from controllers.user_controller import userController
 from controllers.asignatura_controller import asignaturaController
 from controllers.programa_controller import programaController
+from controllers.horario_controller import horarioController
+from controllers.grupoAcademico_controller import grupoAcademicoController
 
 # metodo para mostrar todo los usuario y aplica POLIMORFISMO
 def mostrar_usuarios(user_controller):
@@ -39,6 +41,42 @@ def mostrar_programas(programa_controller):
     for programa in programas:
         programa.mostrar_informacion()
         print("-"*100)
+        
+# metodo para mostrar todos los grupos
+def mostrar_grupos(grupo_academico_controller):
+    grupos = grupo_academico_controller.get_grupos_academicos()
+    
+    if not grupos:
+        print("Sin grupos academicos para mostrar")
+        return
+    
+    for grupo in grupos:
+        grupo.mostrar_informacion_grupo()
+        print("-"*100)
+        
+# metodo para mostrar todos estudiantes matriculados
+def mostrar_estudiantes_matriculados(grupo_academico_controller):
+    gruposEstudiantes = grupo_academico_controller.get_grupos_academicos()
+    
+    if not gruposEstudiantes:
+        print("Sin grupos academicos para mostrar")
+        return
+    
+    for gruposEstudiante in gruposEstudiantes:
+        gruposEstudiante.mostrar_estudiantes()
+        print("-"*100)
+        
+# metodo para mostrar todos los horarios
+def mostrar_horarios(horario_controller):
+    horarios = horario_controller.get_horarios()
+    
+    if not horarios:
+        print("Sin horarios para mostrar")
+        return
+    
+    for horario in horarios:
+        horario.mostrar_informacion()
+        print("-"*100)
 
 def main():
     
@@ -51,6 +89,12 @@ def main():
     # Inicializamos el controlador de programas
     programa_controller = programaController()
     
+    # Inicializamos el controlador de horarios
+    horario_controller = horarioController()
+    
+    # Inicializamos el controlador de grupos academicos
+    grupo_academico_controller = grupoAcademicoController()
+    
     # Precargamos algunos datos
     user_controller.agregar_estudiante("Lucía Pérez", "1010222", "lucia-perez@gmail.com", "EST-01", "Ingeniería de Sistemas", 3, 4.3)
     user_controller.agregar_estudiante("Mateo Gómez", "1010333", "mateo.gomez@um.edu.co", "EST-02", "Ingeniería de Sistemas", 1, 4.0)
@@ -60,6 +104,7 @@ def main():
     user_controller.agregar_administrativo("Julián Ruiz", "554434", "julian.ruiz@um.edu.co", "EMP-A-02", "Biblioteca", "Asistente", "Media")
     asignatura_controller.agregar_asignatura("PRO001", "Programación 1", 4, "ING001")
     programa_controller.agregar_programa("ING001", "Ingenieria en Seguridad de la Información", "Ingenierias", 9)
+    horario_controller.agregar_horario("H001", "Lunes", "18:00", "20:00", "1")
     
     while True:
         
@@ -73,6 +118,7 @@ def main():
         print("+ 2 Usuarios Administrativos")
         print("+ 1 Progarma Académico")
         print("+ 1 Asignatura")
+        print("+ 1 Horario")
         print("===> *** Validaciones básicas *** <===")
         print("*El correo del usuario no puede ir vacios")
         print("*El numero de semestres para el programar academico debe ser mayor a 0")
@@ -85,13 +131,20 @@ def main():
         print("3. Registrar Estudiante")
         print("4. Registrar Docente")
         print("5. Registrar Personal Administrativo")
-        print("6. Listar Programas")
-        print("7. Listar Asignaturas")
-        print("8. Generar Reporte Polimórfico de personas")
-        print("9. Salir")
+        print("6. Registrar Grupo Académico")
+        print("7. Registrar Horario")
+        print("8. Matricula Estudiante")
+        print("9. Retirar Estudiante Estudiante")
+        print("10. Listar Programas")
+        print("11. Listar Asignaturas")
+        print("12. Listar Grupo Academicos")
+        print("13. Listar Horarios")
+        print("14. Listar Estudiantes Matriculados")
+        print("15. Generar Reporte Polimórfico de personas")
+        print("0. Salir")
         
         # capturamos la opcion a ejecutar
-        option = input("Ingrese una opción del 1 al 9: ").strip()
+        option = input("Ingrese una opción del 1 al 15: ").strip()
         print("\n")
         
         # se optado por utiliza un try except para capturar los errores en cada una de los casos
@@ -183,26 +236,195 @@ def main():
                     print(f"Error de validacion: {e}")
                     
             case '6':
+                print("\n--- Registrar Grupo Academico ---")
+                codigoGrupo = input("Ingrese el codigo del grupo academico: ")
+
+                asignaturasDisponibles = asignatura_controller.get_asignaturas()
+                docenteDisponibles = [p for p in user_controller.get_personas() if type(p).__name__ == 'docente']
+                horariosDisponibles = horario_controller.get_horarios()
+
+                if not asignaturasDisponibles:
+                    print("No hay asignaturas registradas, debes crear una primero")
+                elif not docenteDisponibles:
+                    print("No hay docentes registrados, debes crear uno primero")
+                elif not horariosDisponibles:
+                    print("No hay horarios registrados, debes crear uno primero")
+                else:
+                    print("\n--- Asignaturas Disponibles ---")
+                    for i, asig in enumerate(asignaturasDisponibles):
+                        print(f"[{i}] Código: {asig.get_codigoAsignatura()} | Nombre: {asig.get_nombre()}")
+
+                    print("\n--- Docentes Disponibles ---")
+                    for i, docen in enumerate(docenteDisponibles):
+                        print(f"[{i}] N. empleado: {docen.getNumeroDeEmpleado()} | Nombre: {docen.get_nombre()}")
+
+                    print("\n--- Horarios Disponibles ---")
+                    for i, h in enumerate(horariosDisponibles):
+                        print(f"[{i}] ", end="")
+                        h.mostrar_informacion()
+
+                    asignaturaSeleccionada = None
+                    try:
+                        indiceAsignatura = int(input("\nSeleccione el número de la asignatura: "))
+                        asignaturaSeleccionada = asignaturasDisponibles[indiceAsignatura]
+                    except (ValueError, IndexError):
+                        print("[Error] Selección de asignatura inválida.")
+
+                    docenteSeleccionado = None
+                    try:
+                        indiceDocente = int(input("Seleccione el número del docente: "))
+                        docenteSeleccionado = docenteDisponibles[indiceDocente]
+                    except (ValueError, IndexError):
+                        print("[Error] Selección de docente inválida.")
+
+                    horarioSeleccionado = None
+                    try:
+                        indiceHorario = int(input("Seleccione el número del horario: "))
+                        horarioSeleccionado = horariosDisponibles[indiceHorario]
+                    except (ValueError, IndexError):
+                        print("[Error] Selección de horario inválida.")
+
+                    try:
+                        capacidadGrupos = int(input("Ingresa la capacidad del grupo: "))
+                    except ValueError:
+                        capacidadGrupos = 0
+                        print("[Error] Capacidad inválida.")
+
+                    if asignaturaSeleccionada and docenteSeleccionado and horarioSeleccionado and capacidadGrupos > 0:
+                        try:
+                            grupo_academico_controller.agregar_grupo_academico(codigoGrupo, asignaturaSeleccionada, docenteSeleccionado, capacidadGrupos, horarioSeleccionado)
+                            print("Grupo académico creado exitosamente con sus objetos vinculados")
+                        except Exception as e:
+                            print(f"[Error al crear el grupo]: {e}")
+                    else:
+                        print("[Error]: No se pudo crear el grupo porque alguno de los elementos seleccionados no existe o es inválido")
+                    
+            case '7':
+                # capturamos los datos del horario
+                print("\n--- Registrar Horario ---")
+                try:
+                
+                    codigoHorario = input("Ingresa el codigo del horario: ")
+                    diaHorario = input("Ingresa el día del horario: ")
+                    horaIncioHorario = input("Ingresa la hora de inicio (00:00): ")
+                    horaFinalHorario = input("Ingresa la hora de finalización (00:00): ")
+                    salonHorario = input("Ingresa la hora de finalización: ")
+                
+                    # utilizamos el controlador para agregar un nuevo horario
+                    horario_controller.agregar_horario(codigoHorario, diaHorario, horaIncioHorario, horaFinalHorario, salonHorario)
+                except ValueError as e:
+                    print(f"Error de validacion: {e}")
+            
+            case '8':
+                print("\n--- Matricular Estudiante ---")
+                estudiantesDisponibles = [p for p in user_controller.get_personas() if type(p).__name__ == 'estudiante']
+
+                if not estudiantesDisponibles:
+                    print("No hay estudiantes registrados, debes crear uno primero")
+                else:
+                    print("\n--- Estudiantes Disponibles ---")
+                    for i, est in enumerate(estudiantesDisponibles):
+                        print(f"[{i}] Código: {est.getCodigoEstudiante()} | Nombre: {est.get_nombre()}")
+
+                    gruposDisponibles = grupo_academico_controller.get_grupos_academicos()
+
+                    if not gruposDisponibles:
+                        print("No hay grupos académicos registrados, debes crear uno primero")
+                    else:
+                        print("\n--- Grupos Disponibles ---")
+                        for i, grupo in enumerate(gruposDisponibles):
+                            print(f"[{i}] Código: {grupo.get_codigoGrupo()} | Asignatura: {grupo.get_asignatura()} | Capacidad: {grupo.get_capacidad()}")
+
+                        try:
+                            indiceEstudiante = int(input("\nSeleccione el número del estudiante a matricular: "))
+                            estudianteSeleccionado = estudiantesDisponibles[indiceEstudiante]
+                        except (ValueError, IndexError):
+                            estudianteSeleccionado = None
+                            print("[Error] Selección de estudiante inválida.")
+
+                        if estudianteSeleccionado is not None:
+                            try:
+                                indiceGrupo = int(input("Seleccione el número del grupo: "))
+                                grupoSeleccionado = gruposDisponibles[indiceGrupo]
+                            except (ValueError, IndexError):
+                                grupoSeleccionado = None
+                                print("[Error] Selección de grupo inválida.")
+
+                            if grupoSeleccionado is not None:
+                                grupo_academico_controller.agregar_estudiante(grupoSeleccionado.get_codigoGrupo(), estudianteSeleccionado)
+            
+            case '9':
+                print("\n--- Retirar Estudiante ---")
+                gruposDisponibles = grupo_academico_controller.get_grupos_academicos()
+
+                if not gruposDisponibles:
+                    print("No hay grupos académicos registrados, debes crear uno primero")
+                else:
+                    print("\n--- Grupos Disponibles ---")
+                    for i, grupo in enumerate(gruposDisponibles):
+                        print(f"[{i}] Código: {grupo.get_codigoGrupo()} | Asignatura: {grupo.get_asignatura()} | Capacidad: {grupo.get_capacidad()}")
+
+                    try:
+                        indiceGrupo = int(input("\nSeleccione el número del grupo: "))
+                        grupoSeleccionado = gruposDisponibles[indiceGrupo]
+                    except (ValueError, IndexError):
+                        grupoSeleccionado = None
+                        print("[Error] Selección de grupo inválida.")
+
+                    if grupoSeleccionado is not None:
+                        estudiantesMatriculados = grupoSeleccionado.get_estudiantes_matriculados()
+
+                        if not estudiantesMatriculados:
+                            print(f"El grupo {grupoSeleccionado.get_codigoGrupo()} no tiene estudiantes matriculados.")
+                        else:
+                            print("\n--- Estudiantes Matriculados ---")
+                            for i, est in enumerate(estudiantesMatriculados):
+                                print(f"[{i}] Código: {est.getCodigoEstudiante()} | Nombre: {est.get_nombre()}")
+
+                            try:
+                                indiceEstudiante = int(input("\nSeleccione el número del estudiante a retirar: "))
+                                estudianteSeleccionado = estudiantesMatriculados[indiceEstudiante]
+                            except (ValueError, IndexError):
+                                estudianteSeleccionado = None
+                                print("[Error] Selección de estudiante inválida.")
+
+                            if estudianteSeleccionado is not None:
+                                grupo_academico_controller.retirar_estudiante(grupoSeleccionado.get_codigoGrupo(), estudianteSeleccionado.getCodigoEstudiante())
+                    
+            case '10':
                 print("\n--- Listado de programas ---")
                 mostrar_programas(programa_controller)
             
-            case '7':
+            case '11':
                 print("\n--- Listado de asignaturas ---")
                 mostrar_asignaturas(asignatura_controller)
+                
+            case '12':
+                print("\n--- Listado de grupos academicos ---")
+                mostrar_grupos(grupo_academico_controller)
+                
+            case '13':
+                print("\n--- Listado de horarios ---")
+                mostrar_horarios(horario_controller)
+                
+            case '14':
+                print("\n--- Listar Estudiantes Matriculados ---")
+                mostrar_estudiantes_matriculados(grupo_academico_controller)
             
-            case '8':
+            case '15':
                 # mostraremos todos los usuario registrados sin importar el tipo
                 print("=====================================================")
                 print("   REPORTE DE USUARIOS REGISTRADOS (POLIMORFISMO)  ")
                 print("=====================================================")
                 mostrar_usuarios(user_controller)
             
-            case '9':
+            case '0':
                 print("Salir del sistema")
                 break
                 
             case _:
                 print("Opcion invalida, seleccione un numero del 1 al 9")
+        input("\nPresione una tecla para continuar...")
 
 if __name__ == "__main__":
     main()

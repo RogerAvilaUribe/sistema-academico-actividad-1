@@ -1,12 +1,12 @@
 from models.horario import horario
 
 class grupoAcademico:
-    def __init__(self, codigoGrupo, asignatura, docente, capacidad, estudiantesMatriculados, horario):
+    def __init__(self, codigoGrupo, asignatura, docente, capacidad, horario):
         self.set_codigoGrupo(codigoGrupo)
         self.set_asignatura(asignatura)
         self.set_docente(docente)
         self.set_capacidad(capacidad)
-        self.estudiantesMatriculados=[]
+        self.estudiantesMatriculados = []
         self.set_horario(horario)
           
     # Getters and Setters
@@ -17,13 +17,13 @@ class grupoAcademico:
         return self._codigoGrupo
 
     def set_asignatura(self, asignatura):
-        self._asignatura = asignatura
+        self._asignatura = asignatura.get_codigoAsignatura()
 
     def get_asignatura(self):
         return self._asignatura
 
     def set_docente(self, docente):
-        self._docente = docente
+        self._docente = docente.getNumeroDeEmpleado()
 
     def get_docente(self):
         return self._docente
@@ -33,30 +33,30 @@ class grupoAcademico:
 
     def get_capacidad(self):
         return self._capacidad
-
-    # def set_estudiantesMatriculados(self, estudiantesMatriculados):
-    #     self._estudiantesMatriculados = estudiantesMatriculados
-
-    # def get_estudiantesMatriculados(self):
-    #     return self._estudiantesMatriculados 
+    
+    def get_estudiantes_matriculados(self):
+        return self.estudiantesMatriculados.copy()
 
     def set_horario(self, horario):
-        self._horario = horario
+        self._horario = (f"Dia: {horario.get_dia()} - Horario: {horario.get_horaInicio()} a {horario.get_horaFinal()} - Salon: {horario.get_salon()}")
 
     def get_horario(self):
-        return self._horario     
+        return self._horario
 
     def mostrar_informacion_grupo(self):
         print(f"Codigo del grupo: {self.get_codigoGrupo()}")
         print(f"Asignatura: {self.get_asignatura()}")
         print(f"Docente: {self.get_docente()}")
         print(f"Capacidad: {self.get_capacidad()}")
-        print(f"Estudiantes matriculados: {self.get_estudiantesMatriculados()}")
-        print(f"Horario: {self.get_horario()}")   
+        self.mostrar_estudiantes()
+        print(f"Horario: {self.get_horario()}")
 
     def matricular_estudiante(self, estudiante):
+        for est in self.estudiantesMatriculados:
+            if est.getCodigoEstudiante() == estudiante.getCodigoEstudiante():
+                print(f"El estudiante {estudiante.getCodigoEstudiante()} ya está matriculado en el grupo {self.get_codigoGrupo()}.")
+                return
         if len(self.estudiantesMatriculados) < self.get_capacidad():
-            # Pendiente validar si el estudiante ya existe
             self.estudiantesMatriculados.append(estudiante)
             print(f"Estudiante matriculado en el grupo {self.get_codigoGrupo()}")
         else:
@@ -64,13 +64,17 @@ class grupoAcademico:
         print(f"Horario: {self.get_horario()}")  
 
     def retirar_estudiante(self, codigoEstudiante):
-        if codigoEstudiante in self.get_estudiantesMatriculados():
-            self.get_estudiantesMatriculados().remove(codigoEstudiante)
-            print(f"Estudiante retirado del grupo {self.get_codigoGrupo()}")
-        else:
-            print("El estudiante no está matriculado en este grupo.")
+        for est in self.estudiantesMatriculados:
+            if est.getCodigoEstudiante() == codigoEstudiante:
+                self.estudiantesMatriculados.remove(est)
+                print(f"Estudiante retirado del grupo {self.get_codigoGrupo()}")
+                return
+        print("El estudiante no está matriculado en este grupo.")
 
     def mostrar_estudiantes(self):
+        if not self.estudiantesMatriculados:
+            print(f"El grupo {self.get_codigoGrupo()} no tiene estudiantes matriculados.")
+            return
         print(f"Estudiantes matriculados en el grupo {self.get_codigoGrupo()}:")
         for estudiante in self.estudiantesMatriculados:
-            print(f" - {estudiante}")
+            print(f" - Código: {estudiante.getCodigoEstudiante()} | Nombre: {estudiante.get_nombre()}")
