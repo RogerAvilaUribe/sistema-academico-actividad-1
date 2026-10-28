@@ -10,6 +10,7 @@ class userController():
     def agregar_estudiante(self, nombre, identificacion, correo, codigoEstudiante, programaAcademico, semestre, promedio):
         estu = estudiante(nombre, identificacion, correo, codigoEstudiante, programaAcademico, semestre, promedio)
         self.personas.append(estu)
+        return estu
         
     def agregar_docente(self, nombre, identificacion, correo, numeroDeEmpleado, facultad, tipoDeContratacion, numeroDeHorasSemanales):
         doce = docente(nombre, identificacion, correo, numeroDeEmpleado, facultad, tipoDeContratacion, numeroDeHorasSemanales)
